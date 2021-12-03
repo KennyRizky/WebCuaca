@@ -34,7 +34,6 @@ body{
     width: 100px;
     border: 1px black solid;
     border-radius: 10px;
-}
 
 .Content{
     height: 80%;
@@ -76,3 +75,4 @@ body{
 .cardsBig p{
     margin: 20px;
 }
+
