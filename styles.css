@@ -35,3 +35,44 @@ body{
     border: 1px black solid;
     border-radius: 10px;
 }
+
+.Content{
+    height: 80%;
+    display: grid;
+    padding: 10px;
+    grid-column-gap: 50px;
+
+    grid-template-columns: 60% 40%;
+}
+
+.cardsSmall{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-column-gap: 25px;
+    grid-row-gap: 50px;
+    justify-content: space-evenly;
+}
+
+.cards{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: cadetblue;
+    border: 1px solid black;
+}
+
+.cardsBig{
+    background-color: cadetblue;
+    border: 1px solid black;
+    width: 80%;
+}
+
+.cardsBig h3{
+    display: flex;
+    justify-content: center;
+}
+
+.cardsBig p{
+    margin: 20px;
+}
