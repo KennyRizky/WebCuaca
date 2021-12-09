@@ -5,6 +5,11 @@ body{
     background-color: cornflowerblue;
 }
 
+a{
+    text-decoration: none;
+}
+
+
 .NavBar{
     background-color: aqua;
     display: flex;
