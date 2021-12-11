@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="styles.css">
 <title>predict</title>
+
 </head>
 <body>
+    <div class="searchNavBar w3-container w3-display-container">
+        <div class="w3-display-right">
+            <a class="btn w3-left">Home</a>
+            <a class="btn w3-left">Search</a>
+            <a class="btn w3-left">Predict</a>
+        </div>
+    </div>
     <form>
         <fieldset style="width:50%">
             <legend>Will it rain?</legend>
@@ -13,6 +22,18 @@
                         <td>Temperature</td>
                         <td>
                             <input type="text" id="temp" placeholder="Temperature">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Humidity</td>
+                        <td>
+                            <input type="text" id="humid" placeholder="Humidity">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Wind</td>
+                        <td>
+                            <input type="text" id="wind" placeholder="Windy">
                         </td>
                     </tr>
                 </table>
