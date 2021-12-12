@@ -6,17 +6,20 @@
 
 </head>
 <body>
-    <div class="searchNavBar w3-container w3-display-container">
-        <div class="w3-display-right">
-            <a class="btn w3-left">Home</a>
-            <a class="btn w3-left">Search</a>
-            <a class="btn w3-left">Predict</a>
+    <div class="NavBar">
+
+        <h1 class="weather">Weather</h1>
+
+        <div class="Buttons">
+            <a class="btn" href="HomePage.html">Home</a>
+            <a class="btn" href="SearchPage.html">Search</a>
+            <a class="btn" href="predict.html">Predict</a>
         </div>
     </div>
     <form>
-        <fieldset style="width:50%">
+        <fieldset style="width:20%"  class="form1">
             <legend>Will it rain?</legend>
-            <form>
+            <form action="">
                 <table>
                     <tr>
                         <td>Temperature</td>
@@ -37,6 +40,7 @@
                         </td>
                     </tr>
                 </table>
+                <input type="submit" value="Predict">
             </form>
         </fieldset>
     </form>
