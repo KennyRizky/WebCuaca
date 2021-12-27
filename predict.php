@@ -16,31 +16,31 @@
             <a class="btn" href="predict.php">Predict</a>
         </div>
     </div>
-    <form>
+    <form action="PredictController.php" method="get">
         <fieldset style="width:20%"  class="form1">
             <legend>Will it rain?</legend>
-            <form action="">
+            <form>
                 <table>
                     <tr>
                         <td>Temperature</td>
                         <td>
-                            <input type="text" id="temp" placeholder="Temperature">
+                            <input type="text" name="temp" id="temp" placeholder="Temperature">
                         </td>
                     </tr>
                     <tr>
                         <td>Humidity</td>
                         <td>
-                            <input type="text" id="humid" placeholder="Humidity">
+                            <input type="text" name="humid" id="humid" placeholder="Humidity">
                         </td>
                     </tr>
                     <tr>
                         <td>Wind</td>
                         <td>
-                            <input type="text" id="wind" placeholder="Windy">
+                            <input type="text" name="wind" id="wind" placeholder="Windy">
                         </td>
                     </tr>
                 </table>
-                <input type="submit" value="Predict">
+                <input type="submit" name="submit" value="Predict">
             </form>
         </fieldset>
     </form>
