@@ -62,9 +62,9 @@
             </div>
 
             <div class="search-nav-div">
-                <a class="search-navbtn btn" href="HomePage.html">Home</a>
-                <a class="search-navbtn btn" href="SearchPage.html">Search</a>
-                <a class="search-navbtn btn" href="predict.html">Predict</a>
+                <a class="search-navbtn btn" href="HomePage.php">Home</a>
+                <a class="search-navbtn btn" href="SearchPage.php">Search</a>
+                <a class="search-navbtn btn" href="predict.php">Predict</a>
             </div>
         </div>
         <div class="w3-container">

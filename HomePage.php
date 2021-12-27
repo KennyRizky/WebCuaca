@@ -9,9 +9,9 @@
             <h1 class="weather">Weather</h1>
 
             <div class="Buttons">
-                <a class="btn" href="HomePage.html">Home</a>
-                <a class="btn" href="SearchPage.html">Search</a>
-                <a class="btn" href="predict.html">Predict</a>
+                <a class="btn" href="HomePage.php">Home</a>
+                <a class="btn" href="SearchPage.php">Search</a>
+                <a class="btn" href="predict.php">Predict</a>
             </div>
         </div>
 
