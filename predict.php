@@ -2,7 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="styles.css">
-<title>predict</title>
+<title>Predict Page</title>
 
 </head>
 <body>
