@@ -69,6 +69,16 @@
         </div>
         <div class="w3-container">
             <div class="w3-quarter">
+                <h1 style="margin-left:2px">
+                    <?php
+                        $var1=1;
+                        $var2=23;
+                        $output=passthru("python test.py");
+
+                        echo $output;
+                    ?>
+                </h1>
+
                 <h1 class="w3-border-bottom w3-border-black">Weather for Sydney:</h1>
 
                 <div class="w3-border-bottom w3-border-black">
