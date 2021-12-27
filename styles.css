@@ -5,13 +5,22 @@ body{
     background-color: cornflowerblue;
 }
 
+a{
+    text-decoration: none;
+}
+
+
 .NavBar{
     background-color: aqua;
     display: flex;
     justify-content: space-between;
     padding: 0;
     align-items: center;
+}
 
+.searchNavBar{
+    background-color: #fef8a0;
+    display: flex;
 }
 
 .weather{
@@ -75,4 +84,18 @@ body{
 
 .cardsBig p{
     margin: 20px;
+}
+.location-picker-select{
+    height: 30px;
+    width: 150px;
+}
+.form1{
+    margin-top: 50px;
+}
+.search-navbtn{
+    float: left;
+}
+.search-nav-div{
+    align-self: center;
+    margin-left: auto;
 }

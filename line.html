@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Line Chart</title>
+    <script src="Chart.bundle.js"></script>
+    <script src="utils.js"></script>
+    <style>
+    canvas{
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+    </style>
+</head>
+<body>
+    <div style="width:50% ;">
+        <canvas id="canvas"></canvas>
+    </div>
+    <script>
+		window.onload = function(){
+            var ctx = document.getElementById("canvas").getContext("2d");
+            new Chart(ctx, myChart);
+        }
+        var dataPemasukan = [
+                            randomScalingFactor() ,
+                            randomScalingFactor() ,
+                            randomScalingFactor() ,
+                            randomScalingFactor() ,
+                            randomScalingFactor() ,
+                            randomScalingFactor() ,
+                            randomScalingFactor()
+        ];
+        var dataPengeluaran = [
+                            randomScalingFactor() ,
+                            randomScalingFactor() ,
+                            randomScalingFactor() ,
+                            randomScalingFactor() ,
+                            randomScalingFactor() ,
+                            randomScalingFactor() ,
+                            randomScalingFactor()
+        ];
+        var myChart = {
+            type: 'line',
+            data: {
+                datasets : [
+                    {/*objek dataset1*/
+                        label: "Pengeluaran",
+                        backgroundColor: window.chartColors.grey,
+                        borderColor: window.chartColors.red,
+                        data: dataPengeluaran,
+                        fill: true
+                    },
+                    {/*objek dataset2*/
+                        label: "Pemasukan",
+                        backgroundColor: window.chartColors.white,
+                        borderColor: window.chartColors.blue,
+                        data: dataPemasukan,
+                        fill: true
+                    } 
+                ],
+                labels: ["January", "February", "March", "April", "May", "June", "July"],
+            },
+            options: {
+                scales:{
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Month'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Month'
+                        }
+                    }]
+                },
+                title:{
+                    display: true,
+                    text:'Chart.js Line Char',
+                },
+                responsive: true
+            }
+        };
+    </script>
+</body>
+
+</html>
