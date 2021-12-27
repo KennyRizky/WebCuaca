@@ -7,29 +7,64 @@
     </head>
     <body>
         <div class="searchNavBar w3-container w3-display-container">
-            <div class="w3-margin-bottom w3-left w3-margin-right">
+            <div class="w3-margin-bottom w3-margin-right location-picker-div">
                 <h2>Pick Location:</h2>
-                <select class="location-picker" name="location">
-                    <option value="sydney">Sydney</option>
-                    <option value="melbourne">Melbourne</option>
-                    <option value="albury">Albury</option>
+
+                <?php 
+                //get dates and locations from csv
+                $row = 0;
+                $location = [];
+                $date = [];
+                if (($handle = fopen("weatherAUS.csv", "r")) !== FALSE) {
+                    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                        $num = count($data);
+                        for ($c=0; $c < $num; $c++) {
+                            if ($row != 0 && $c == 0 && !in_array($data[$c], $date))
+                            {
+                                array_push($date,$data[$c]);
+                            }
+                            if ($row != 0 && $c == 1 && !in_array($data[$c], $location))
+                            {
+                                array_push($location,$data[$c]);
+                                break;
+                            }
+                        }
+                        $row++;
+                    }
+                    fclose($handle);
+                }
+                ?>
+
+                <select style="height: 30px; width: 150px;">
+                    <?php foreach($location as $key => $value) { ?>
+                        <option value="<?php echo $key ?>"><?php echo $value ?></option>
+                    <?php }?>
                 </select>
             </div>
-            <div class="w3-left date-picker">
+            <div style="margin-left: 2%; width: 40%;">
                 <h2>Pick Date:</h2>
 
                 <span>From: </span>
-                <input type="date">
+                <select style="height: 30px; width: 150px;">
+                    <?php foreach($date as $key => $value) { ?>
+                        <option value="<?php echo $key ?>"><?php echo $value ?></option>
+                    <?php }?>
+                </select>
 
-                <span class="w3-margin-left">To: </span>
-                <input type="date">
-                <button class="w3-margin-left">GO</button>
+                <span style="margin-left: 2%;">To: </span>
+                <select style="height: 30px; width: 150px;">
+                    <?php foreach($date as $key => $value) { ?>
+                        <option value="<?php echo $key ?>"><?php echo $value ?></option>
+                    <?php }?>
+                </select>
+
+                <button style="margin-left: 2%;">GO</button>
             </div>
 
-            <div class="Buttons w3-display-right">
-                <a class="btn w3-left" href="HomePage.html">Home</a>
-                <a class="btn w3-left" href="SearchPage.html">Search</a>
-                <a class="btn w3-left" href="predict.html">Predict</a>
+            <div class="search-nav-div">
+                <a class="search-navbtn btn" href="HomePage.html">Home</a>
+                <a class="search-navbtn btn" href="SearchPage.html">Search</a>
+                <a class="search-navbtn btn" href="predict.html">Predict</a>
             </div>
         </div>
         <div class="w3-container">
@@ -70,10 +105,11 @@
                 </div>
             </div>
             
-            <div class="search-chart w3-threequarter" style="width: 50%; margin-left: 300px; margin-top: 70px; background-color: #fff1d7;">
+            <div class="search-chart w3-threequarter" style="width: 50%; margin-left: 15%; margin-top: 3%; background-color: #fff1d7;">
                 <canvas id="canvas"></canvas>
             </div>
         </div>
+
         <script>
             window.onload = function(){
                 var ctx = document.getElementById("canvas").getContext("2d");

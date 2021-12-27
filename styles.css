@@ -20,6 +20,7 @@ a{
 
 .searchNavBar{
     background-color: #fef8a0;
+    display: flex;
 }
 
 .weather{
@@ -84,13 +85,17 @@ a{
 .cardsBig p{
     margin: 20px;
 }
-.location-picker{
+.location-picker-select{
     height: 30px;
     width: 150px;
 }
-.date-picker{
-    margin-left: 30px;
-}
 .form1{
     margin-top: 50px;
+}
+.search-navbtn{
+    float: left;
+}
+.search-nav-div{
+    align-self: center;
+    margin-left: auto;
 }
