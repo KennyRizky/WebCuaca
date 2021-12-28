@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-<?php
-    session_start();
-?>
 <html>
 <head>
     <link rel="stylesheet" href="styles.css">
@@ -49,12 +46,11 @@
     </form>
 
     <?php
-        if(isset($_SESSION['Today'])){
-            if($_SESSION['Today'][0] == 1){
-                echo "Hujan bro!";
-            }
-            else{
-                echo "Ga hujan bro!";
+        if(isset($_GET['resultToday'])){
+            if($_GET['resultToday'] == 1){
+                echo "hujan";
+            }else if($_GET['resultToday'] == 0){
+                echo "ga hujan";
             }
         }
     ?>
