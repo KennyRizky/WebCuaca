@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+    session_start();
+?>
 <html>
 <head>
     <link rel="stylesheet" href="styles.css">
@@ -22,21 +25,21 @@
             <form>
                 <table>
                     <tr>
-                        <td>Temperature</td>
+                        <td>Rainfall</td>
                         <td>
-                            <input type="text" name="temp" id="temp" placeholder="Temperature">
+                            <input type="text" name="rainfall" id="rainfall" placeholder="Rainfall">
                         </td>
                     </tr>
                     <tr>
-                        <td>Humidity</td>
+                        <td>Humidity 3PM</td>
                         <td>
-                            <input type="text" name="humid" id="humid" placeholder="Humidity">
+                            <input type="text" name="humid3" id="humid3" placeholder="Humidity 3 PM">
                         </td>
                     </tr>
                     <tr>
-                        <td>Wind</td>
+                        <td>Humidity 9AM</td>
                         <td>
-                            <input type="text" name="wind" id="wind" placeholder="Windy">
+                            <input type="text" name="humid9" id="humid9" placeholder="Humidity 9 AM">
                         </td>
                     </tr>
                 </table>
@@ -44,5 +47,16 @@
             </form>
         </fieldset>
     </form>
+
+    <?php
+        if(isset($_SESSION['Today'])){
+            if($_SESSION['Today'][0] == 1){
+                echo "Hujan bro!";
+            }
+            else{
+                echo "Ga hujan bro!";
+            }
+        }
+    ?>
 </body>
 </html>
