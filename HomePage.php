@@ -1,6 +1,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="styles.css">
+        <title>Home</title>
     </head>
 
     <body>
