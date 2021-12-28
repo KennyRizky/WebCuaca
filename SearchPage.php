@@ -17,36 +17,17 @@
 
                     <?php 
                         //get dates and locations from csv
-                        $row = 0;
-                        $location = [];
-                        $date = [];
-                        if (($handle = fopen("weatherAUS.csv", "r")) !== FALSE) {
-                            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                                $num = count($data);
-                                for ($c=0; $c < $num; $c++) {
-                                    if ($row != 0 && $c == 0 && !in_array($data[$c], $date))
-                                    {
-                                        array_push($date,$data[$c]);
-                                    }
-                                    if ($row != 0 && $c == 1 && !in_array($data[$c], $location))
-                                    {
-                                        array_push($location,$data[$c]);
-                                        break;
-                                    }
-                                }
-                                $row++;
-                            }
-                            fclose($handle);
-                        }
+                        $location = exec("python getLocationFromCSV.py");
+                        $location = json_decode($location);
                     ?>
 
-                    <select name="location" style="height: 30px; width: 150px;">
+                    <select id="location" name="location" style="height: 30px; width: 150px;">
                         <?php foreach($location as $key => $value) { ?>
                             <option value="<?php echo $value ?>"><?php echo $value ?></option>
                         <?php }?>
                     </select>
                 </div>
-                <div style="margin-left: 2%; width: 40%;">
+                <div style="width: 40%;">
                     <h2>Pick Date:</h2>
 
                     <span>From: </span>
@@ -55,7 +36,7 @@
                     <span style="margin-left: 2%;">To: </span>
                     <input type="date" id="dateTo" name="dateTo" min="2008-12-02" max="2017-06-25">
 
-                    <input type="submit" style="margin-left: 2%;" value="Go"></input>
+                    <input type="submit" style="margin-top: 5%;" value="Go"></input>
                 </div>
             </form>
 
@@ -200,7 +181,9 @@
             var dateTo =  document.getElementById('dateTo');
             dateTo.value = "2008-12-02";
 
-            dateFrom.onchange = function changeToMax(){
+            dateFrom.addEventListener("change", changeToMax);
+
+            function changeToMax(){
                 var dateFrom = document.getElementById('dateFrom');
                 var dateTo =  document.getElementById('dateTo');
                 var minDate = new Date(dateFrom.value);
@@ -211,11 +194,23 @@
                     dateTo.value = minDate;
                 }
             }
+            function changeFromValue(){
+                var dateFrom = document.getElementById('dateFrom');
+                var minDate = dateFrom.getAttribute("min");
+                var maxDate = dateFrom.getAttribute("max");
+                if(dateFrom.value < minDate){
+                    dateFrom.value = minDate;
+                }
+                if(dateFrom.value > maxDate){
+                    dateFrom.value = maxDate;
+                }
+            }
 
             <?php 
                 if(isset($_SESSION['dateFrom'])){
                     echo "document.getElementById('dateFrom').value = '$_SESSION[dateFrom]';";
                     echo "document.getElementById('dateTo').value = '$_SESSION[dateTo]';";
+                    echo "changeToMax();";
 
                     //set singledatepicker min and value
                     $singleMinDate = $_SESSION['dateFrom'];
@@ -273,6 +268,31 @@
                     xmlhttp.open("GET", "getRowValue.php?date="+singleDate, true);
                     xmlhttp.send();
                 }
+            }
+
+            var locationSelect = document.getElementById("location");
+            locationSelect.addEventListener("change", getDateMinMax);
+
+            function getDateMinMax() {
+                var location = this.options[this.selectedIndex].value;
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var arrRes = this.responseText;
+                        console.log(arrRes);
+                        if(arrRes){
+                            arrRes = JSON.parse(arrRes);
+                            document.getElementById('dateTo').setAttribute("min",arrRes[0]);
+                            document.getElementById('dateTo').setAttribute("max",arrRes[1]);
+                            document.getElementById('dateFrom').setAttribute("min",arrRes[0]);
+                            document.getElementById('dateFrom').setAttribute("max",arrRes[1]);
+                            changeFromValue();
+                            changeToMax();
+                        }
+                    }
+                }
+                xmlhttp.open("GET", "getDateMinMax.php?location="+location, true);
+                xmlhttp.send();
             }
         </script>
     </body>
