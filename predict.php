@@ -22,21 +22,21 @@
             <form>
                 <table>
                     <tr>
-                        <td>Temperature</td>
+                        <td>Rainfall</td>
                         <td>
-                            <input type="text" name="temp" id="temp" placeholder="Temperature">
+                            <input type="text" name="rainfall" id="rainfall" placeholder="Rainfall">
                         </td>
                     </tr>
                     <tr>
-                        <td>Humidity</td>
+                        <td>Humidity 3PM</td>
                         <td>
-                            <input type="text" name="humid" id="humid" placeholder="Humidity">
+                            <input type="text" name="humid3" id="humid3" placeholder="Humidity 3 PM">
                         </td>
                     </tr>
                     <tr>
-                        <td>Wind</td>
+                        <td>Humidity 9AM</td>
                         <td>
-                            <input type="text" name="wind" id="wind" placeholder="Windy">
+                            <input type="text" name="humid9" id="humid9" placeholder="Humidity 9 AM">
                         </td>
                     </tr>
                 </table>
@@ -44,5 +44,15 @@
             </form>
         </fieldset>
     </form>
+
+    <?php
+        if(isset($_GET['resultToday'])){
+            if($_GET['resultToday'] == 1){
+                echo "hujan";
+            }else if($_GET['resultToday'] == 0){
+                echo "ga hujan";
+            }
+        }
+    ?>
 </body>
 </html>
