@@ -21,6 +21,7 @@ a{
 .searchNavBar{
     background-color: #fef8a0;
     display: flex;
+    justify-content: space-betweens;
 }
 
 .weather{
@@ -98,4 +99,48 @@ a{
 .search-nav-div{
     align-self: center;
     margin-left: auto;
+}
+
+.formSearch{
+    display: flex;
+}
+
+.formDate{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.predictInput{
+    background-color: cadetblue;
+    width: 40%;
+    height: 60%;
+    padding: 50px;
+    margin: 20px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+.predictInput h2{
+    margin-top: -20px;
+}
+
+.predictContent{
+    display: flex;
+}
+
+.formPredict{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.formPredict input{
+    height: 30px;
+    margin-top: 10px;
+}
+
+.predictResultDiv{
+    margin: 20px;
+
 }
