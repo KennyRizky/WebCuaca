@@ -11,7 +11,7 @@
     </head>
     <body>
         <div class="searchNavBar w3-container w3-display-container">
-            <form action="SearchController.php" method="get">
+            <form action="SearchController.php" method="get" class="formSearch">
                 <div class="w3-margin-bottom w3-margin-right location-picker-div">
                     <h2>Pick Location:</h2>
 
@@ -27,16 +27,20 @@
                         <?php }?>
                     </select>
                 </div>
-                <div style="width: 40%;">
-                    <h2>Pick Date:</h2>
+                <div>
+                    <div>
+                        <h2>Pick Date:</h2>
+                    </div>    
 
-                    <span>From: </span>
-                    <input type="date" id="dateFrom" name="dateFrom" min="2008-12-01" max="2017-06-25">
+                    <div class="formDate">
+                        From:
+                        <input type="date" id="dateFrom" name="dateFrom" min="2008-12-01" max="2017-06-25" style="margin-right: 10px">
 
-                    <span style="margin-left: 2%;">To: </span>
-                    <input type="date" id="dateTo" name="dateTo" min="2008-12-02" max="2017-06-25">
+                        To:
+                        <input type="date" id="dateTo" name="dateTo" min="2008-12-02" max="2017-06-25" style="margin-right: 10px">
 
-                    <input type="submit" style="margin-top: 5%;" value="Go"></input>
+                        <input type="submit" style="" value="Go"></input>
+                    </div>
                 </div>
             </form>
 
