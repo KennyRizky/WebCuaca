@@ -20,7 +20,7 @@
     <div class="predictContent">
         <div class="predictInput">
             <h2>
-                Input data to predict the weather: 
+                Input data to predict weather: 
             </h2>
             <form action="PredictController.php" method="get" class="formPredict">
 
@@ -29,10 +29,15 @@
                 Humidity 3 PM: <input type="text" name="humid3" id="humid3" placeholder="Humidity 3 PM"> <br>
 
                 Humidity 9 AM: <input type="text" name="humid9" id="humid9" placeholder="Humidity 9 AM"> <br>
+       
+                Sunshine: <input type="text" name="sunshine" id="sunshine" placeholder="Sunshine"> <br>
+
+                Cloud 3 PM: <input type="text" name="cloud3" id="cloud3" placeholder="Cloud 3 PM"> <br>
 
                 <input type="submit" name="submit" value="Predict" style="width: 25%">
             </form>
         </div>
+
 
         <div class="predictResultDiv">
             <?php
