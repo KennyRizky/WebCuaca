@@ -103,78 +103,13 @@
             <div class="search-chart w3-threequarter" style="width: 50%; margin-left: 15%; margin-top: 3%; background-color: #fff1d7;">
                 <canvas id="canvas"></canvas>
             </div>
+
+            <div class="search-chart w3-threequarter" style="width: 50%; margin-left: 15%; margin-top: 3%; margin-bottom: 3%; background-color: #fff1d7;">
+                <canvas id="canvas2"></canvas>
+            </div>
         </div>
 
         <script>
-            //create graph
-            window.onload = function(){
-                var ctx = document.getElementById("canvas").getContext("2d");
-                new Chart(ctx, myChart);
-            }
-            var dataPemasukan = [
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor()
-            ];
-            var dataPengeluaran = [
-                            randomScalingFactor() ,
-                            randomScalingFactor() ,
-                            randomScalingFactor() ,
-                            randomScalingFactor() ,
-                            randomScalingFactor() ,
-                            randomScalingFactor() ,
-                            randomScalingFactor()
-            ];
-            var myChart = {
-                type: 'line',
-                data: {
-                    datasets : [
-                        {/*objek dataset1*/
-                            label: "Pengeluaran",
-                            backgroundColor: window.chartColors.grey,
-                            borderColor: window.chartColors.red,
-                            data: dataPengeluaran,
-                            fill: true
-                        },
-                        {/*objek dataset2*/
-                            label: "Pemasukan",
-                            backgroundColor: window.chartColors.white,
-                            borderColor: window.chartColors.blue,
-                            data: dataPemasukan,
-                            fill: true
-                        } 
-                    ],
-                    labels: ["January", "February", "March", "April", "May", "June", "July"],
-                },
-                options: {
-                    scales:{
-                        xAxes: [{
-                            display: true,
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'Month'
-                            }
-                        }],
-                        yAxes: [{
-                            display: true,
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'Month'
-                            }
-                        }]
-                    },
-                    title:{
-                        display: true,
-                        text:'Chart.js Line Char',
-                    },
-                    responsive: true
-                }
-            };
-
             //set calendar default value
             var dateFrom = document.getElementById('dateFrom');
             dateFrom.value = "2008-12-01";
@@ -294,6 +229,135 @@
                 xmlhttp.open("GET", "getDateMinMax.php?location="+location, true);
                 xmlhttp.send();
             }
+
+            <?php 
+                if(isset($_SESSION['dateFrom']) && isset($_SESSION['dateTo'])){
+                    //get array of selected dates, min temps, max temps
+                    $arrDates = [];
+                    $arrMinTemps = [];
+                    $arrMaxTemps = [];
+                    $humidity9am = [];
+                    $humidity3pm = [];
+                    foreach ($_SESSION['rows'] as $row) {
+                        array_push($arrDates,$row[0]);
+                        array_push($arrMinTemps,(float)$row[2]);
+                        array_push($arrMaxTemps,(float)$row[3]);
+                        array_push($humidity9am,(int)$row[13]);
+                        array_push($humidity3pm,(int)$row[14]);
+                    }
+                    $arrDates = json_encode($arrDates);
+                    echo "var arrDates = ". $arrDates . ";\n";
+
+                    $arrMinTemps = json_encode($arrMinTemps);
+                    echo "var arrMinTemps = ". $arrMinTemps . ";\n";
+
+                    $arrMaxTemps = json_encode($arrMaxTemps);
+                    echo "var arrMaxTemps = ". $arrMaxTemps . ";\n";
+
+                    $humidity9am = json_encode($humidity9am);
+                    echo "var humidity9am = ". $humidity9am . ";\n";
+
+                    $humidity3pm = json_encode($humidity3pm);
+                    echo "var humidity3pm = ". $humidity3pm . ";\n";
+                }
+            ?>
+            //create graph
+            window.onload = function(){
+                var ctx = document.getElementById("canvas").getContext("2d");
+                var ctx2 = document.getElementById("canvas2").getContext("2d");
+                new Chart(ctx, tempChart);
+                new Chart(ctx2, humidityChart);
+            }
+            var tempChart = {
+                type: 'line',
+                data: {
+                    datasets : [
+                        {/*objek dataset1*/
+                            label: "Min Temp",
+                            backgroundColor: window.chartColors.grey,
+                            borderColor: window.chartColors.red,
+                            data: arrMinTemps,
+                            fill: false
+                        },
+                        {/*objek dataset2*/
+                            label: "Max Temp",
+                            backgroundColor: window.chartColors.white,
+                            borderColor: window.chartColors.blue,
+                            data: arrMaxTemps,
+                            fill: false
+                        } 
+                    ],
+                    labels: arrDates,
+                },
+                options: {
+                    scales:{
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Date'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Temperature'
+                            }
+                        }]
+                    },
+                    title:{
+                        display: true,
+                        text:'Temperature Line Chart',
+                    },
+                    responsive: true
+                }
+            };
+            var humidityChart = {
+                type: 'line',
+                data: {
+                    datasets : [
+                        {/*objek dataset1*/
+                            label: "Humidity 9am",
+                            backgroundColor: window.chartColors.grey,
+                            borderColor: window.chartColors.red,
+                            data: humidity9am,
+                            fill: false
+                        },
+                        {/*objek dataset2*/
+                            label: "Humidity 3pm",
+                            backgroundColor: window.chartColors.white,
+                            borderColor: window.chartColors.blue,
+                            data: humidity3pm,
+                            fill: false
+                        } 
+                    ],
+                    labels: arrDates,
+                },
+                options: {
+                    scales:{
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Date'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Humidity'
+                            }
+                        }]
+                    },
+                    title:{
+                        display: true,
+                        text:'Humidity Line Chart',
+                    },
+                    responsive: true
+                }
+            };
         </script>
     </body>
 </html>
