@@ -5,14 +5,9 @@ import pickle
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import chi2
 from sklearn.model_selection import train_test_split
-
 from sklearn.neighbors import KNeighborsClassifier as KNN
-from sklearn.naive_bayes import GaussianNB as NBC
-
 from sklearn.metrics import accuracy_score
 from sklearn.feature_selection import f_classif
-
-
 
 dataFrame_cuaca = pd.read_csv("weatherAUS.csv")
 dataFrame_cuaca.head()
@@ -41,32 +36,31 @@ dataFrame_cuaca_baru.head()
 dataFrame_fiturCuaca = dataFrame_cuaca_baru.iloc[:, 0:19]
 dataFrame_fiturCuaca.head(1)
 
-#jadikan Label
-df_label_weather_today = dataFrame_cuaca_baru['RainToday']
-df_label_weather_today.head(1)
+df_label_today = dataFrame_cuaca_baru['RainToday']
+df_label_today.head(1)
 
 selectorToday = SelectKBest(score_func = f_classif, k = 3)
-selectorToday.fit(dataFrame_fiturCuaca, df_label_weather_today)
+selectorToday.fit(dataFrame_fiturCuaca, df_label_today)
 
 sel_features_today = selectorToday.get_support(indices = 3)
 
 kolom_sel_features_today = dataFrame_fiturCuaca.iloc[:, sel_features_today]
 kolom_sel_features_today.head()
 
-x_train_today, x_test_today, y_train_today, y_test_today = train_test_split(kolom_sel_features_today, df_label_weather_today, test_size = 0.3, random_state = 1)
+x_train_today, x_test_today, y_train_today, y_test_today = train_test_split(kolom_sel_features_today, df_label_today, test_size = 0.3, random_state = 1)
 
 list_hasilToday = []
 for i in range(3, 5):
- #MODEL
+
  Model_Today = KNN(n_neighbors=i)
 
- #TRAIN MODEL
+
  Model_Today.fit(x_train_today, y_train_today)
 
- #PREDICT
+ 
  y_pred_today = Model_Today.predict(x_test_today)
 
- #ACCURACY
+ 
  acc_today = accuracy_score(y_test_today, y_pred_today)
  list_hasilToday.append(acc_today)
 
@@ -75,11 +69,11 @@ bestKToday = np.argmax(list_hasilToday)
 
 
 best_modelToday = KNN(n_neighbors= 9).fit(x_train_today, y_train_today)
-pkl_filename = "Today_9.pkl"
+pkl_filename = "Today.pkl"
 with open(pkl_filename, "wb") as file:
   pickle.dump(best_modelToday, file)
 
-#load
+
 with open(pkl_filename, "rb") as file:
   loaded_model_KNN_Today = pickle.load(file)
 
