@@ -5,5 +5,10 @@
     
     $predictToday = exec("python3 predictToday.py $rainfall $humid3 $humid9");
 
-    header("Location: predict.php?resultToday=".$predictToday[1]);
+    $sunshine = $_GET['sunshine'];
+    $cloud3 = $_GET['cloud3'];
+
+    $predictTomorrow = exec("python3 predictTomorrow.py $sunshine $humid3 $cloud3");
+
+    header("Location: predict.php?resultTomorrow=".$predictTomorrow[1]."&resultToday=".$predictToday[1]);
 ?>
