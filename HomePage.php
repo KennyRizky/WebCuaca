@@ -1,14 +1,13 @@
 <html>
     <head>
         <link rel="stylesheet" href="styles.css">
-        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
         <title>Home</title>
     </head>
 
     <body>
         <div class="NavBar">
 
-            <h1 class="weather"><i class='fas fa-cloud-sun'></i>  Weather</h1>
+            <h1 class="weather">Weather</h1>
 
             <div class="Buttons">
                 <a class="btn" href="HomePage.php">Home</a>

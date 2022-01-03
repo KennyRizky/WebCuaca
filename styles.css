@@ -19,7 +19,7 @@ a{
 }
 
 .searchNavBar{
-    background-color: aqua;
+    background-color: #fef8a0;
     display: flex;
     justify-content: space-betweens;
 }
@@ -144,9 +144,3 @@ a{
     margin: 20px;
 
 }
-
-.weatherIcon{
-    font-size: 100px;
-}
-
-
